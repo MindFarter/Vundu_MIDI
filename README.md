@@ -1,4 +1,4 @@
-# Vundu_MIDI
+# Vundu_MIDI           [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/MindFarter/Vundu_MIDI) 
 
 **v0.0.2** · A studio mixing-console for your MIDI keyboard or guitar, running in
 the browser.
