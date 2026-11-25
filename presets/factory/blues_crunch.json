@@ -1,0 +1,66 @@
+{
+  "name": "Blues Crunch",
+  "category": "Guitar",
+  "instrument": "guitar",
+  "guitar_source": "audio",
+  "sound": "builtin:clean_guitar",
+  "description": "Overdriven tweed-style amp with slap-back.",
+  "chain": [
+    {
+      "type": "gate",
+      "params": {
+        "threshold": -55
+      }
+    },
+    {
+      "type": "overdrive",
+      "params": {
+        "drive": 20,
+        "tone": 2800,
+        "level": -8
+      }
+    },
+    {
+      "type": "amp",
+      "params": {
+        "gain": 16,
+        "bass": 1,
+        "middle": 3,
+        "treble": 1,
+        "master": -10,
+        "cab": 1
+      }
+    },
+    {
+      "type": "delay",
+      "params": {
+        "time": 120,
+        "feedback": 0.15,
+        "mix": 0.18
+      }
+    },
+    {
+      "type": "reverb",
+      "params": {
+        "size": 0.45,
+        "mix": 0.15
+      }
+    }
+  ],
+  "master": {
+    "volume": -6,
+    "pan": 0,
+    "input_gain": 0,
+    "instrument_level": 0,
+    "mute": false,
+    "limiter": true,
+    "eq": {
+      "enabled": true,
+      "params": {}
+    },
+    "comp": {
+      "enabled": false,
+      "params": {}
+    }
+  }
+}

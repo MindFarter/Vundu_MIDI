@@ -1,0 +1,47 @@
+{
+  "name": "Dub Bass",
+  "category": "Synth",
+  "instrument": "keyboard",
+  "sound": "builtin:synth_bass",
+  "description": "Fat filtered bass with bus compression.",
+  "chain": [
+    {
+      "type": "overdrive",
+      "params": {
+        "drive": 12,
+        "tone": 1800,
+        "level": -6
+      }
+    },
+    {
+      "type": "compressor",
+      "params": {
+        "threshold": -22,
+        "ratio": 5,
+        "attack": 5,
+        "release": 120,
+        "makeup": 4
+      }
+    }
+  ],
+  "master": {
+    "volume": -6,
+    "pan": 0,
+    "input_gain": 0,
+    "instrument_level": 0,
+    "mute": false,
+    "limiter": true,
+    "eq": {
+      "enabled": true,
+      "params": {
+        "low": 3,
+        "high": -2
+      }
+    },
+    "comp": {
+      "enabled": false,
+      "params": {}
+    }
+  },
+  "guitar_source": "audio"
+}

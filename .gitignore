@@ -1,0 +1,39 @@
+# --- Vundu_MIDI runtime data (settings, user presets, recordings, plugin cache)
+data/
+*.wav
+*.flac
+recordings/
+
+# --- Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Virtual environments
+.venv/
+venv/
+env/
+
+# --- Minihost source build (Raspberry Pi installs)
+third_party/
+minihost-src/
+
+# --- Editors / OS
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# --- Logs and secrets
+*.log
+.env

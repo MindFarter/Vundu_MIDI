@@ -1,0 +1,58 @@
+{
+  "name": "Vintage Electric Piano",
+  "category": "Keyboard",
+  "instrument": "keyboard",
+  "sound": "builtin:electric_piano",
+  "description": "Tine piano with stereo tremolo and chorus.",
+  "chain": [
+    {
+      "type": "overdrive",
+      "params": {
+        "drive": 6,
+        "tone": 4200,
+        "level": -3,
+        "mix": 0.6
+      }
+    },
+    {
+      "type": "tremolo",
+      "params": {
+        "rate": 4.5,
+        "depth": 0.45,
+        "stereo": 1
+      }
+    },
+    {
+      "type": "chorus",
+      "params": {
+        "rate": 0.6,
+        "depth": 2.5,
+        "mix": 0.35
+      }
+    },
+    {
+      "type": "reverb",
+      "params": {
+        "size": 0.5,
+        "mix": 0.18
+      }
+    }
+  ],
+  "master": {
+    "volume": -6,
+    "pan": 0,
+    "input_gain": 0,
+    "instrument_level": 0,
+    "mute": false,
+    "limiter": true,
+    "eq": {
+      "enabled": true,
+      "params": {}
+    },
+    "comp": {
+      "enabled": false,
+      "params": {}
+    }
+  },
+  "guitar_source": "audio"
+}

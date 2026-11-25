@@ -1,0 +1,42 @@
+{
+  "name": "Crystal Bells",
+  "category": "Synth",
+  "instrument": "keyboard",
+  "sound": "builtin:bells",
+  "description": "FM bells floating in delay and reverb.",
+  "chain": [
+    {
+      "type": "delay",
+      "params": {
+        "time": 500,
+        "feedback": 0.4,
+        "mix": 0.25,
+        "pingpong": 1
+      }
+    },
+    {
+      "type": "reverb",
+      "params": {
+        "size": 0.85,
+        "mix": 0.35
+      }
+    }
+  ],
+  "master": {
+    "volume": -6,
+    "pan": 0,
+    "input_gain": 0,
+    "instrument_level": 0,
+    "mute": false,
+    "limiter": true,
+    "eq": {
+      "enabled": true,
+      "params": {}
+    },
+    "comp": {
+      "enabled": false,
+      "params": {}
+    }
+  },
+  "guitar_source": "audio"
+}

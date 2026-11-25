@@ -1,0 +1,51 @@
+{
+  "name": "Gospel Organ",
+  "category": "Keyboard",
+  "instrument": "keyboard",
+  "sound": "builtin:organ",
+  "description": "Tonewheel organ with rotary-style chorus and grit.",
+  "chain": [
+    {
+      "type": "overdrive",
+      "params": {
+        "drive": 10,
+        "tone": 3500,
+        "level": -4,
+        "mix": 0.7
+      }
+    },
+    {
+      "type": "chorus",
+      "params": {
+        "rate": 5.5,
+        "depth": 1.5,
+        "delay": 4,
+        "mix": 0.5
+      }
+    },
+    {
+      "type": "reverb",
+      "params": {
+        "size": 0.55,
+        "mix": 0.2
+      }
+    }
+  ],
+  "master": {
+    "volume": -6,
+    "pan": 0,
+    "input_gain": 0,
+    "instrument_level": 0,
+    "mute": false,
+    "limiter": true,
+    "eq": {
+      "enabled": true,
+      "params": {}
+    },
+    "comp": {
+      "enabled": false,
+      "params": {}
+    }
+  },
+  "guitar_source": "audio"
+}

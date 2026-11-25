@@ -1,0 +1,51 @@
+{
+  "name": "Analog Lead",
+  "category": "Synth",
+  "instrument": "keyboard",
+  "sound": "builtin:synth_lead",
+  "description": "Squelchy mono-style lead with ping-pong delay.",
+  "chain": [
+    {
+      "type": "distortion",
+      "params": {
+        "gain": 10,
+        "fuzz": 0.1,
+        "level": -6,
+        "tone": 5000
+      }
+    },
+    {
+      "type": "delay",
+      "params": {
+        "time": 330,
+        "feedback": 0.45,
+        "mix": 0.3,
+        "pingpong": 1
+      }
+    },
+    {
+      "type": "reverb",
+      "params": {
+        "size": 0.6,
+        "mix": 0.2
+      }
+    }
+  ],
+  "master": {
+    "volume": -6,
+    "pan": 0,
+    "input_gain": 0,
+    "instrument_level": 0,
+    "mute": false,
+    "limiter": true,
+    "eq": {
+      "enabled": true,
+      "params": {}
+    },
+    "comp": {
+      "enabled": false,
+      "params": {}
+    }
+  },
+  "guitar_source": "audio"
+}

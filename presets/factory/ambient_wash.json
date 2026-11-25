@@ -1,0 +1,61 @@
+{
+  "name": "Ambient Wash",
+  "category": "Guitar",
+  "instrument": "guitar",
+  "guitar_source": "audio",
+  "sound": "builtin:clean_guitar",
+  "description": "Shimmering swells: tremolo, long delays, huge reverb.",
+  "chain": [
+    {
+      "type": "compressor",
+      "params": {
+        "threshold": -26,
+        "ratio": 4,
+        "makeup": 5
+      }
+    },
+    {
+      "type": "chorus",
+      "params": {
+        "rate": 0.25,
+        "depth": 5,
+        "mix": 0.45
+      }
+    },
+    {
+      "type": "delay",
+      "params": {
+        "time": 720,
+        "feedback": 0.6,
+        "mix": 0.4,
+        "pingpong": 1,
+        "tone": 3000
+      }
+    },
+    {
+      "type": "reverb",
+      "params": {
+        "size": 0.97,
+        "damping": 0.25,
+        "predelay": 60,
+        "mix": 0.55
+      }
+    }
+  ],
+  "master": {
+    "volume": -6,
+    "pan": 0,
+    "input_gain": 0,
+    "instrument_level": 0,
+    "mute": false,
+    "limiter": true,
+    "eq": {
+      "enabled": true,
+      "params": {}
+    },
+    "comp": {
+      "enabled": false,
+      "params": {}
+    }
+  }
+}

@@ -1,0 +1,21 @@
+# systemd unit for Vundu_MIDI - installed by scripts/install.sh --service
+[Unit]
+Description=Vundu_MIDI studio console server
+After=network-online.target sound.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=__USER__
+Group=audio
+WorkingDirectory=__DIR__
+ExecStart=/usr/bin/python3 __DIR__/vundu_midi.py
+Restart=on-failure
+RestartSec=3
+# PipeWire / PulseAudio session for the user (desktop Raspberry Pi OS)
+Environment=XDG_RUNTIME_DIR=/run/user/__UID__
+LimitRTPRIO=95
+LimitMEMLOCK=infinity
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ app_name }} {{ version }}</title>
+<link rel="icon" href="{{ url_for('static', filename='img/logo.svg') }}" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500;600&family=Share+Tech+Mono&display=swap">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/console.css') }}?v={{ version }}">
+</head>
+<body>
+<div class="console" id="console">
+
+  <!-- ============ Menu bar ============ -->
+  <header class="menubar">
+    <a class="brand" href="/" aria-label="Vundu_MIDI home">
+      <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="" width="30" height="30">
+      <span class="brand-name">Vundu<b>_MIDI</b></span>
+      <span class="brand-ver">v{{ version }}</span>
+    </a>
+    <nav class="menu" aria-label="Main menu">
+      <button data-panel="plugins">Plugins</button>
+      <button data-panel="library">Library</button>
+      <button data-panel="presets">Presets</button>
+      <button data-panel="instruments">Instruments</button>
+      <button data-panel="devices">Devices</button>
+      <button data-panel="recordings">Recordings</button>
+      <button data-panel="midimap">MIDI map</button>
+      <button data-panel="settings">Settings</button>
+      <button data-panel="about">Help</button>
+    </nav>
+    <div class="status-leds">
+      <span class="led-tag" id="led-audio" title="Audio engine"><i></i>Audio</span>
+      <span class="led-tag" id="led-midi" title="MIDI interface"><i></i>MIDI</span>
+      <span class="led-tag" id="led-plug" title="Minihost plugin host"><i></i>Plugins</span>
+    </div>
+  </header>
+
+  <div class="learn-banner" role="status">MIDI learn is on: click a knob or fader, then move a control on your MIDI device. <button class="btn small" id="learn-off">Done</button></div>
+
+  <!-- ============ Screen ============ -->
+  <section class="screen-bay">
+    <div class="screen" id="screen">
+      <div class="screen-info">
+        <div class="si-preset" id="si-preset">—</div>
+        <dl>
+          <dt>Instrument</dt><dd id="si-inst">—</dd>
+          <dt>Sound</dt><dd id="si-sound">—</dd>
+          <dt>MIDI in</dt><dd id="si-midi">—</dd>
+          <dt>Last note</dt><dd id="si-note">—</dd>
+          <dt>Engine</dt><dd id="si-engine">—</dd>
+          <dt>DSP load</dt><dd id="si-cpu">—</dd>
+        </dl>
+      </div>
+      <div class="screen-wave">
+        <canvas id="wave" aria-label="Output waveform"></canvas>
+        <div class="screen-chain" id="si-chain"></div>
+      </div>
+      <div class="screen-spec">
+        <canvas id="spectrum" aria-label="Spectrum analyser"></canvas>
+        <div class="rec-clock" id="rec-clock">00:00.0</div>
+      </div>
+    </div>
+    <div class="transport">
+      <button class="tbtn" id="btn-prev" title="Previous preset">◀ Preset</button>
+      <button class="tbtn" id="btn-next" title="Next preset">Preset ▶</button>
+      <button class="tbtn" id="btn-save" title="Save current settings as a preset">Save preset</button>
+      <button class="tbtn" id="btn-kbd" aria-pressed="false" title="Play notes from the computer keyboard">Computer keys</button>
+      <button class="tbtn warn" id="btn-panic" title="Stop all notes">Panic</button>
+    </div>
+  </section>
+
+  <!-- ============ Meter bridge ============ -->
+  <section class="bridge" aria-label="Meters, tape deck, mixer and master dynamics">
+
+    <div class="bridge-left">
+      <div class="vu-pair">
+        <figure class="vu"><canvas id="vu-l" width="260" height="160"></canvas><figcaption>Left</figcaption></figure>
+        <figure class="vu"><canvas id="vu-r" width="260" height="160"></canvas><figcaption>Right</figcaption></figure>
+      </div>
+
+      <!-- Tape deck: record and play back takes -->
+      <div class="deck" id="deck" aria-label="Tape deck">
+        <div class="deck-screen">
+          <div class="reels" aria-hidden="true"><i class="reel"></i><i class="tape"></i><i class="reel"></i></div>
+          <div class="deck-readout">
+            <div class="deck-line"><span class="deck-state" id="deck-state">Stopped</span><span class="deck-file" id="deck-file">No take loaded</span></div>
+            <div class="deck-counter"><span id="deck-pos">00:00.0</span><small>/ <span id="deck-len">00:00.0</span></small></div>
+            <div class="deck-title" id="deck-title">Press record to start a take</div>
+          </div>
+          <div class="deck-bar" id="deck-bar" role="slider" tabindex="0" aria-label="Position in take" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="deck-fill"></i></div>
+        </div>
+        <div class="deck-fields">
+          <div class="dfield"><label for="deck-artist">Your name</label><input id="deck-artist" maxlength="80" placeholder="Bertie" autocomplete="name"></div>
+          <div class="dfield"><label for="deck-title-in">Audio name</label><input id="deck-title-in" maxlength="80" placeholder="Untitled"></div>
+          <div class="dfield"><label for="deck-date">Date</label><input id="deck-date" type="date"></div>
+        </div>
+        <div class="deck-keys">
+          <button class="dkey" id="dk-rew" title="Rewind (hold to keep winding)" aria-label="Rewind">&#9664;&#9664;</button>
+          <button class="dkey play" id="dk-play" title="Play" aria-label="Play">&#9654;</button>
+          <button class="dkey pause" id="dk-pause" title="Pause" aria-label="Pause">&#10074;&#10074;</button>
+          <button class="dkey" id="dk-stop" title="Stop" aria-label="Stop">&#9632;</button>
+          <button class="dkey" id="dk-ff" title="Fast forward (hold to keep winding)" aria-label="Fast forward">&#9654;&#9654;</button>
+          <button class="dkey rec" id="dk-rec" title="Record" aria-label="Record"><span class="dot"></span></button>
+          <select id="deck-takes" aria-label="Load a take"><option value="">Load a take…</option></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="ledmeters">
+      <canvas id="led-meter" width="90" height="230" aria-label="Peak meter"></canvas>
+      <div class="db-readout"><span id="db-l">-∞</span><span id="db-r">-∞</span><small>dBFS peak</small></div>
+      <button class="clip-led" id="clip-led" title="Clip indicator - click to reset">Clip</button>
+    </div>
+
+    <div class="dyn-block mixer-block">
+      <div class="block-head"><h2>Mixer</h2></div>
+      <div class="mixer" id="mixer"></div>
+    </div>
+
+    <div class="dyn-block comp-block">
+      <div class="block-head">
+        <h2>Bus comp</h2>
+        <button class="lamp" id="comp-on" aria-pressed="false">In</button>
+      </div>
+      <div class="gr-wrap">
+        <canvas id="vu-gr" width="170" height="104"></canvas>
+        <span class="gr-label">Gain reduction</span>
+      </div>
+      <div class="knob-grid" id="comp-knobs"></div>
+    </div>
+
+    <div class="dyn-block eq-block">
+      <div class="block-head">
+        <h2>Master EQ</h2>
+        <button class="lamp" id="eq-on" aria-pressed="true">In</button>
+      </div>
+      <div class="knob-grid" id="eq-knobs"></div>
+    </div>
+  </section>
+
+  <!-- ============ Channel strips ============ -->
+  <section class="desk" aria-label="Channel strips">
+    <div class="strips" id="strips"></div>
+  </section>
+
+  <footer class="footbar">
+    <span>Vundu_MIDI is open source, built on <a href="https://github.com/shakfu/minihost" target="_blank" rel="noopener">Minihost</a> — all credit for the plugin host belongs to its developers.</span>
+    <span id="foot-net"></span>
+  </footer>
+</div>
+
+<!-- ============ Drawer for menu panels ============ -->
+<div class="drawer-scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-labelledby="drawer-title">
+  <div class="drawer-head">
+    <h2 id="drawer-title">Panel</h2>
+    <button class="icon-btn" id="drawer-close" aria-label="Close panel">✕</button>
+  </div>
+  <div class="drawer-body" id="drawer-body"></div>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="{{ url_for('static', filename='js/console.js') }}?v={{ version }}"></script>
+</body>
+</html>

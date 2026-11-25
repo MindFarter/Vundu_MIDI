@@ -1,0 +1,70 @@
+{
+  "name": "Metal Lead",
+  "category": "Guitar",
+  "instrument": "guitar",
+  "guitar_source": "audio",
+  "sound": "builtin:clean_guitar",
+  "description": "High-gain 4x12 with tight gate and long delay.",
+  "chain": [
+    {
+      "type": "gate",
+      "params": {
+        "threshold": -48,
+        "release": 60
+      }
+    },
+    {
+      "type": "distortion",
+      "params": {
+        "gain": 38,
+        "tone": 3200,
+        "fuzz": 0.25,
+        "level": -18
+      }
+    },
+    {
+      "type": "amp",
+      "params": {
+        "gain": 20,
+        "bass": 4,
+        "middle": -3,
+        "treble": 3,
+        "presence": 4,
+        "master": -12,
+        "cab": 2
+      }
+    },
+    {
+      "type": "delay",
+      "params": {
+        "time": 450,
+        "feedback": 0.35,
+        "mix": 0.2,
+        "pingpong": 1
+      }
+    },
+    {
+      "type": "reverb",
+      "params": {
+        "size": 0.7,
+        "mix": 0.18
+      }
+    }
+  ],
+  "master": {
+    "volume": -6,
+    "pan": 0,
+    "input_gain": 0,
+    "instrument_level": 0,
+    "mute": false,
+    "limiter": true,
+    "eq": {
+      "enabled": true,
+      "params": {}
+    },
+    "comp": {
+      "enabled": false,
+      "params": {}
+    }
+  }
+}

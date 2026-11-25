@@ -1,0 +1,42 @@
+{
+  "name": "MIDI Guitar - Nylon",
+  "category": "Guitar",
+  "instrument": "guitar",
+  "guitar_source": "midi",
+  "sound": "builtin:nylon_guitar",
+  "description": "For MIDI guitar pickups: nylon string voice in a room.",
+  "chain": [
+    {
+      "type": "eq3",
+      "params": {
+        "low": -1,
+        "mid": 1.5,
+        "mid_freq": 2200,
+        "high": 1
+      }
+    },
+    {
+      "type": "reverb",
+      "params": {
+        "size": 0.5,
+        "mix": 0.2
+      }
+    }
+  ],
+  "master": {
+    "volume": -6,
+    "pan": 0,
+    "input_gain": 0,
+    "instrument_level": 0,
+    "mute": false,
+    "limiter": true,
+    "eq": {
+      "enabled": true,
+      "params": {}
+    },
+    "comp": {
+      "enabled": false,
+      "params": {}
+    }
+  }
+}

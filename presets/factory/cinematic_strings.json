@@ -1,0 +1,52 @@
+{
+  "name": "Cinematic Strings",
+  "category": "Keyboard",
+  "instrument": "keyboard",
+  "sound": "builtin:strings",
+  "description": "Wide string ensemble into a big hall.",
+  "chain": [
+    {
+      "type": "chorus",
+      "params": {
+        "rate": 0.3,
+        "depth": 4,
+        "mix": 0.4
+      }
+    },
+    {
+      "type": "delay",
+      "params": {
+        "time": 420,
+        "feedback": 0.3,
+        "mix": 0.15,
+        "pingpong": 1
+      }
+    },
+    {
+      "type": "reverb",
+      "params": {
+        "size": 0.92,
+        "damping": 0.3,
+        "predelay": 40,
+        "mix": 0.4
+      }
+    }
+  ],
+  "master": {
+    "volume": -6,
+    "pan": 0,
+    "input_gain": 0,
+    "instrument_level": 0,
+    "mute": false,
+    "limiter": true,
+    "eq": {
+      "enabled": true,
+      "params": {}
+    },
+    "comp": {
+      "enabled": false,
+      "params": {}
+    }
+  },
+  "guitar_source": "audio"
+}
